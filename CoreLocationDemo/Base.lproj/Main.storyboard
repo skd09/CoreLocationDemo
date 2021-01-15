@@ -11,7 +11,7 @@
         <!--Reverse GeoCoding-->
         <scene sceneID="QBW-Ob-RNt">
             <objects>
-                <viewController id="l9y-St-BAC" sceneMemberID="viewController">
+                <viewController id="l9y-St-BAC" customClass="ReGeoViewController" customModule="CoreLocationDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Oil-83-zhh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -41,6 +41,9 @@
                                 <state key="normal" title="Fetch Address">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="onFetchAddressClicked:" destination="l9y-St-BAC" eventType="touchUpInside" id="Rbu-jh-984"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="29z-PM-nce">
                                 <rect key="frame" x="20" y="378" width="374" height="30"/>
@@ -84,6 +87,12 @@
                     <tabBarItem key="tabBarItem" title="Reverse GeoCoding" image="location.circle.fill" catalog="system" selectedImage="location.circle.fill" id="Fns-rx-pQH">
                         <color key="badgeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
+                    <connections>
+                        <outlet property="btnFetchAddress" destination="iMz-9g-XZV" id="Q8e-nf-Qm2"/>
+                        <outlet property="lblAddress" destination="29z-PM-nce" id="dee-KU-0Yq"/>
+                        <outlet property="tfLatitude" destination="yZA-rk-m7X" id="MUJ-w9-2IB"/>
+                        <outlet property="tfLongitude" destination="bBJ-af-DMp" id="lnl-vg-wcv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0eG-iw-ShV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -92,7 +101,7 @@
         <!--Foward GeoCoding-->
         <scene sceneID="RUf-e0-wp5">
             <objects>
-                <viewController id="Cox-h8-P0U" sceneMemberID="viewController">
+                <viewController id="Cox-h8-P0U" customClass="ForGeoViewController" customModule="CoreLocationDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OYM-W9-OQP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -130,6 +139,9 @@
                                 <state key="normal" title="Fetch Coordinates">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="onFetchCoordinateClicked:" destination="Cox-h8-P0U" eventType="touchUpInside" id="PkW-Hf-7jg"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1dJ-oZ-5Cv">
                                 <rect key="frame" x="20" y="456.5" width="374" height="30"/>
@@ -176,6 +188,13 @@
                     <tabBarItem key="tabBarItem" title="Foward GeoCoding" image="location" catalog="system" selectedImage="location" id="KaG-Kq-Xd3">
                         <color key="badgeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
+                    <connections>
+                        <outlet property="btnFetchCoordinate" destination="64r-Jd-2mf" id="Ekg-H3-EJg"/>
+                        <outlet property="lblLocation" destination="1dJ-oZ-5Cv" id="yUm-r8-DVX"/>
+                        <outlet property="tfCity" destination="Wdc-Io-WCb" id="voV-8l-n59"/>
+                        <outlet property="tfCountry" destination="PxV-8w-bC8" id="Nbx-Q6-m4g"/>
+                        <outlet property="tfStreet" destination="FWg-CQ-tJD" id="f9w-rY-KBR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tel-hh-taj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -211,18 +230,35 @@
         <!--Location-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="CoreLocationDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LocationViewController" customModule="CoreLocationDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="qsJ-P7-lW2">
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="M9G-DW-TCP"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qsJ-P7-lW2" secondAttribute="bottom" id="0eF-dq-63Z"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qsJ-P7-lW2" secondAttribute="trailing" id="4yL-f5-rEp"/>
+                            <constraint firstItem="qsJ-P7-lW2" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="hil-p6-MOz"/>
+                            <constraint firstItem="qsJ-P7-lW2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="iIa-U4-hil"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Location" image="map" catalog="system" selectedImage="map" id="Ced-9A-9vT">
                         <color key="badgeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="mapView" destination="qsJ-P7-lW2" id="u1T-hO-Ufo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
